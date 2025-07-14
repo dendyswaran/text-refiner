@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <title>Quick Refine</title>
+    <link rel="stylesheet" href="quick-refine.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="app-title">
+                <span class="icon">⚡</span> Quick Refine
+            </h1>
+            <select id="refinement-mode" class="mode-selector">
+                <option value="formal">📝 Formal</option>
+                <option value="casual">💬 Casual</option>
+                <option value="concise">⚡ Concise</option>
+                <option value="professional">💼 Professional</option>
+                <option value="creative">🎨 Creative</option>
+            </select>
+        </div>
+        <div class="content">
+            <textarea id="refine-text" class="text-area" rows="6"></textarea>
+            <div id="output-text" class="text-area output-area">
+                <div class="placeholder">Refined text will appear here...</div>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="refine-btn" class="refine-button">Refine</button>
+            <button id="copy-btn" class="copy-button" disabled>Copy & Close</button>
+        </div>
+    </div>
+    <script src="quick-refine.js"></script>
+</body>
+</html> 

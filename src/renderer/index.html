@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <title>Text Refiner AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="icon">✨</span>
+                    Text Refiner AI
+                </h1>
+                <p class="app-subtitle">Enhance your text with AI-powered refinement</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h2>Original Text</h2>
+                    <div class="input-controls">
+                        <select id="refinement-mode" class="mode-selector">
+                            <option value="formal">📝 Formal</option>
+                            <option value="casual">💬 Casual</option>
+                            <option value="concise">⚡ Concise</option>
+                            <option value="professional">💼 Professional</option>
+                            <option value="creative">🎨 Creative</option>
+                        </select>
+                        <button id="refine-btn" class="refine-button">
+                            <span class="button-text">Refine with AI</span>
+                            <span class="spinner hidden">⟳</span>
+                        </button>
+                    </div>
+                </div>
+                <textarea 
+                    id="input-text" 
+                    class="text-area input-area" 
+                    placeholder="Paste or type your text here to refine it with AI...&#10;&#10;Examples:&#10;• Email drafts&#10;• Meeting notes&#10;• Social media posts&#10;• Documentation&#10;• Creative writing"
+                    rows="10"
+                ></textarea>
+                <div class="character-count">
+                    <span id="char-count">0</span> characters
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="output-section">
+                <div class="section-header">
+                    <h2>Refined Text</h2>
+                    <div class="output-controls">
+                        <button id="copy-btn" class="copy-button" disabled>
+                            <span class="copy-icon">📋</span>
+                            Copy to Clipboard
+                        </button>
+                        <button id="replace-btn" class="replace-button" disabled>
+                            <span class="replace-icon">🔄</span>
+                            Replace Original
+                        </button>
+                    </div>
+                </div>
+                <div id="output-text" class="text-area output-area">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🤖</div>
+                        <h3>AI-refined text will appear here</h3>
+                        <p>Enter your text above and click "Refine with AI" to get started</p>
+                    </div>
+                </div>
+                <div id="processing-status" class="processing-status hidden">
+                    <div class="status-content">
+                        <div class="loading-spinner">⟳</div>
+                        <span class="status-text">Processing your text...</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="api-status">
+                    <span id="api-status-indicator" class="status-indicator"></span>
+                    <span id="api-status-text">Ready</span>
+                </div>
+                <div class="app-info">
+                    <span>Powered by LM Studio</span>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+
+        <!-- Settings Modal (for future use) -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Settings</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group" id="license-group">
+                        <label for="license-key-input">License Key</label>
+                        <div class="license-input-wrapper">
+                            <input type="text" id="license-key-input" placeholder="Enter your Pro license key" />
+                            <button id="activate-license-btn" class="btn-primary">Activate</button>
+                        </div>
+                        <small id="license-status">Enter a valid key to unlock Pro features.</small>
+                    </div>
+
+                    <hr class="settings-divider">
+
+                    <div class="setting-group">
+                        <label for="provider-select">Inference Provider</label>
+                        <select id="provider-select">
+                            <option value="lm-studio">LM Studio</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="openrouter">OpenRouter</option>
+                        </select>
+                        <small>Select your preferred AI provider.</small>
+                    </div>
+
+                    <div class="setting-group" id="api-key-group">
+                        <label for="api-key-input">API Key</label>
+                        <input type="password" id="api-key-input" placeholder="Enter your API key" />
+                        <small>Your API key for the selected provider.</small>
+                    </div>
+
+                    <div class="setting-group" id="lm-studio-url-group">
+                        <label for="lm-studio-url">LM Studio URL</label>
+                        <input type="text" id="lm-studio-url" placeholder="http://localhost:1234/v1" />
+                        <small>URL for your local LM Studio server.</small>
+                    </div>
+
+                    <div class="setting-group" id="openrouter-url-group">
+                        <label for="openrouter-url">OpenRouter URL</label>
+                        <input type="text" id="openrouter-url" placeholder="https://openrouter.ai/api/v1" />
+                        <small>URL for the OpenRouter API.</small>
+                    </div>
+
+                    <div class="setting-group" id="openrouter-model-group">
+                        <label for="openrouter-model-select">Model</label>
+                        <select id="openrouter-model-select"></select>
+                        <small>Choose a model from OpenRouter.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary modal-cancel">Cancel</button>
+                    <button class="btn-primary modal-save">Save</button>
+                </div>
+            </div>
+        </div>
+        <div id="modal-overlay" class="modal-overlay hidden"></div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

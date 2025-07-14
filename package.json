@@ -1,0 +1,63 @@
+{
+  "name": "windows-text-refiner",
+  "version": "1.0.0",
+  "description": "Desktop app for refining text with AI using OpenAI GPT-4o-mini",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "text",
+    "refine",
+    "openai",
+    "electron",
+    "desktop"
+  ],
+  "author": "Dendy",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "electron-store": "^10.1.0",
+    "keytar": "^7.9.0",
+    "openai": "^4.24.1"
+  },
+  "build": {
+    "appId": "com.dendy.windows-text-refiner",
+    "productName": "Text Refiner AI",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

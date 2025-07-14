@@ -1,0 +1,19 @@
+# Application Icon Placeholder
+
+This directory should contain the application icons in the following formats:
+- icon.png (256x256) - Primary application icon
+- icon.ico (Windows format) 
+- icon.icns (macOS format)
+- icon.svg (Scalable vector format)
+
+For production use, please replace these placeholders with professionally designed icons.
+
+The current SVG icon in this directory provides a good starting template with:
+- Purple gradient background matching the app theme
+- Document with text lines
+- AI sparkle effects
+- Magic wand/pencil tool
+- Professional appearance
+
+Recommended icon sizes:
+- 16x16, 32x32, 48x48, 64x64, 128x128, 256x256, 512x512
