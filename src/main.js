@@ -153,7 +153,13 @@ app.on('activate', () => {
 
 ipcMain.handle('is-pro', async () => await isPro());
 ipcMain.handle('activate-license', async (event, key) => await activateLicense(key));
-
+ipcMain.handle('copy-to-clipboard', async (event, text) => {
+    await clipboard.writeText(text)
+    // close window if it is open
+    if (quickRefineWindow) {
+        quickRefineWindow.close();
+    }
+});
 ipcMain.handle('refine-text', async (event, { text, mode }) => {
     try {
         const provider = store.get('provider');
@@ -224,4 +230,14 @@ ipcMain.handle('save-settings', async (event, settings) => {
         console.error('Failed to save settings:', error);
         return { success: false, error: error.message };
     }
+});
+
+ipcMain.on('close-quick-refine', () => {
+    if (quickRefineWindow) {
+        quickRefineWindow.close();
+    }
+});
+
+ipcMain.handle('get-clipboard-text', () => {
+    return clipboard.readText();
 });

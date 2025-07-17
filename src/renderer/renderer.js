@@ -330,8 +330,12 @@ async function handleActivateLicense() {
 
 async function showSettings() {
     try {
-        // First, get the license status
+        // First, get the license status and update license group visibility
         const isProUser = await window.electronAPI.isPro();
+        const licenseGroup = document.getElementById('license-group');
+        if (licenseGroup) {
+            licenseGroup.style.display = isProUser ? 'none' : 'block';
+        }
 
         // Get current settings from the main process
         const settings = await window.electronAPI.getSettings();
